@@ -172,9 +172,11 @@ export function materials() {
     beak: std(0xef8a21, 0.38),
     eye: std(0x0b0b0c, 0.2),
     orange: std(0xf07f2a, 0.6),
-    foil: std(0xd09a34, 0.3, 1.0, { bumpMap: T.foilBump, bumpScale: 1.4 }),
-    foilSilver: std(0xc8ccd2, 0.3, 1.0, { bumpMap: T.foilBump, bumpScale: 1.2 }),
-    solar: std(0xc4cbe6, 0.58, 0.0, { map: T.solar }),
+    // the satellite's foil: a soft sheen that moves with the light, without sparkling or clipping to white
+    foil: std(0xd09a34, 0.42, 1.0, { bumpMap: T.foilBump, bumpScale: 0.6 }),
+    foilSilver: std(0xa9aeb6, 0.44, 1.0, { bumpMap: T.foilBump, bumpScale: 0.55 }),
+    // the cells sit just above the panel, so they always draw in front of it instead of flickering through
+    solar: std(0xc4cbe6, 0.58, 0.0, { map: T.solar, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4 }),
     panelBack: std(0xd8d6cf, 0.6),
     flag: std(0xd6342b, 0.7, 0, { side: THREE.DoubleSide }),
     mast: std(0xf1f0ea, 0.45),
@@ -503,8 +505,8 @@ function buildGPS() {
     for (let p = 0; p < 2; p++) {
       const cx = s * (0.8 + p * 1.52);
       add(wing, BOX(1.46, 0.035, 2.3), M.panelBack, cx, 0, 0);
-      add(wing, new THREE.PlaneGeometry(1.42, 2.26).rotateX(-PI / 2), M.solar, cx, 0.019, 0);
-      add(wing, new THREE.PlaneGeometry(1.42, 2.26).rotateX(PI / 2), M.solar, cx, -0.019, 0);
+      add(wing, new THREE.PlaneGeometry(1.42, 2.26).rotateX(-PI / 2), M.solar, cx, 0.024, 0);
+      add(wing, new THREE.PlaneGeometry(1.42, 2.26).rotateX(PI / 2), M.solar, cx, -0.024, 0);
     }
     add(wing, BOX(0.06, 0.04, 2.0), M.aluDark, s * 0.05, 0, 0);
   }
@@ -874,7 +876,8 @@ function qkrtStandIn() {
   return root;
 }
 
-// a banner that says hello, redrawn once the display font has loaded
+// the team's banner, as in pictures/plane-banner.jpg: the Queen's crest and wordmark in red on grey,
+// redrawn once the crest has loaded
 let bannerMat = null;
 function bannerMaterial() {
   if (bannerMat) return bannerMat;
@@ -886,22 +889,38 @@ function bannerMaterial() {
   // the close up looks at the banner's back face, so mirror it to read the right way round
   tex.wrapS = THREE.RepeatWrapping;
   tex.repeat.x = -1;
+  const crest = new Image();
+  const serif = 'Georgia, "Times New Roman", Times, serif';
   const draw = () => {
     const g = c.getContext('2d');
-    g.fillStyle = '#f4f1e8';
-    g.fillRect(0, 0, c.width, c.height);
-    g.fillStyle = '#c8322b';
-    g.fillRect(0, 0, c.width, 14);
-    g.fillRect(0, c.height - 14, c.width, 14);
-    g.fillStyle = '#111317';
-    g.font = '800 120px "Hubot Sans", "Mona Sans", sans-serif';
-    g.textAlign = 'center';
-    g.textBaseline = 'middle';
-    g.fillText('hello', c.width / 2, c.height / 2 + 6);
+    const W = c.width, H = c.height;
+    g.fillStyle = '#b4b5b7';
+    g.fillRect(0, 0, W, H);
+    const word = 'Queen\u2019s', small = 'UNIVERSITY';
+    const big = Math.round(H * 0.58), sm = Math.round(H * 0.15), track = sm * 0.16;
+    g.font = `400 ${big}px ${serif}`;
+    const wordW = g.measureText(word).width;
+    g.font = `700 ${sm}px ${serif}`;
+    const smallW = [...small].reduce((a, ch) => a + g.measureText(ch).width, 0) + track * (small.length - 1);
+    // crest on the left, the wordmark beside it, the pair centered
+    const crestH = H * 0.74, crestW = (crestH * 173) / 192, gap = H * 0.11;
+    const x0 = (W - (crestW + gap + Math.max(wordW, smallW))) / 2;
+    if (crest.naturalWidth) g.drawImage(crest, x0, (H - crestH) / 2, crestW, crestH);
+    const tx = x0 + crestW + gap;
+    g.fillStyle = '#b90e31';
+    g.textAlign = 'left';
+    g.textBaseline = 'alphabetic';
+    g.font = `400 ${big}px ${serif}`;
+    g.fillText(word, tx, H * 0.6);
+    // UNIVERSITY, spaced out and lined up under the end of Queen's
+    g.font = `700 ${sm}px ${serif}`;
+    let x = tx + wordW - smallW;
+    for (const ch of small) { g.fillText(ch, x, H * 0.85); x += g.measureText(ch).width + track; }
     tex.needsUpdate = true;
   };
+  crest.onload = draw;
+  crest.src = 'pictures/QueensCrest.png';
   draw();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
   bannerMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.8, side: THREE.DoubleSide, transparent: true });
   return bannerMat;
 }
