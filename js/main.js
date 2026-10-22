@@ -763,10 +763,10 @@ async function start() {
       if (wa) wa.rotation.x = ang;
       if (wb) wb.rotation.x = ang;
       key.position.copy(sunCam).multiplyScalar(10);
-      key.intensity = 3.0;
+      key.intensity = 2.4;
       rim.intensity = 0.25;
       fill.intensity = 0.12;
-      studio.environmentIntensity = 0.14;
+      studio.environmentIntensity = 0.2;
       sats.uniforms.uHide.value = heroSat;
       sats.uniforms.uHideAlpha.value = smooth(clamp((heroK - 0.75) / 0.25));
       // label next to the satellite

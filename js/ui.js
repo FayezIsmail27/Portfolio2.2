@@ -364,28 +364,104 @@ export function createSRC() {
     idx = target;
     [...stepsEl.children].forEach((li, i) => { li.classList.toggle('now', i === idx); li.classList.toggle('done', i < idx); });
     render(idx >= 0 ? P.steps[idx] : null);
-    explain.textContent = idx >= 0 ? P.steps[idx].say : 'Press Next step to watch the instruction run, one clock at a time.';
-    document.getElementById('src-next').textContent = idx >= P.steps.length - 1 ? 'Start over' : 'Next step';
+    explain.textContent = idx >= 0 ? P.steps[idx].say : IDLE;
+    nextBtn.textContent = idx >= P.steps.length - 1 ? 'Start over' : 'Next step';
   }
+  const IDLE = 'Press Next step to watch the instruction run, one clock at a time.';
+  const nextBtn = document.getElementById('src-next');
   function next() { const P = PROGS[progKey]; go(idx >= P.steps.length - 1 ? -1 : idx + 1); }
-  document.getElementById('src-next').addEventListener('click', () => { stop(); next(); });
+  nextBtn.addEventListener('click', () => { stop(); next(); });
   document.getElementById('src-back').addEventListener('click', () => { stop(); go(idx - 1); });
+
+  // On screen it plays by itself: ld, then add, then brzr, and round again. Pause and Play stop and
+  // restart that loop, picking an instruction jumps to it, and Next, Back or a step in the list
+  // stop the loop so you can step by hand.
   const playBtn = document.getElementById('src-play');
-  function stop() { clearInterval(timer); timer = null; playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = 'Play'; }
+  const progBtns = [...document.querySelectorAll('[data-prog]')];
+  const ORDER = progBtns.map((b) => b.dataset.prog);
+  const BEAT = 2400;
+  let looping = true, onScreen = false;
+  function pick(key) {
+    progKey = key;
+    progBtns.forEach((x) => x.setAttribute('aria-pressed', x.dataset.prog === key ? 'true' : 'false'));
+  }
+  // the next clock, or the next instruction once this one has finished
+  function beat() {
+    if (idx >= PROGS[progKey].steps.length - 1) { pick(ORDER[(ORDER.indexOf(progKey) + 1) % ORDER.length]); go(0); }
+    else next();
+  }
+  function schedule(wait = BEAT) {
+    clearTimeout(timer);
+    timer = looping && onScreen ? setTimeout(() => { beat(); schedule(); }, wait) : null;
+  }
+  function setLoop(on) {
+    looping = on;
+    playBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    playBtn.textContent = on ? 'Pause' : 'Play';
+    // read the words out when stepping by hand, not every few seconds while it plays
+    explain.setAttribute('aria-live', on ? 'off' : 'polite');
+  }
+  function stop() { setLoop(false); schedule(); }
   playBtn.addEventListener('click', () => {
-    if (timer) return stop();
-    playBtn.setAttribute('aria-pressed', 'true'); playBtn.textContent = 'Pause';
-    if (idx >= PROGS[progKey].steps.length - 1) go(-1);
-    next();
-    timer = setInterval(() => { if (idx >= PROGS[progKey].steps.length - 1) return stop(); next(); }, 2400);
+    if (looping) return stop();
+    setLoop(true);
+    beat();
+    schedule();
   });
-  document.querySelectorAll('[data-prog]').forEach((b) => b.addEventListener('click', () => {
-    stop();
-    progKey = b.dataset.prog;
-    document.querySelectorAll('[data-prog]').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
-    go(-1);
+  progBtns.forEach((b) => b.addEventListener('click', () => {
+    pick(b.dataset.prog);
+    if (looping) { go(0); schedule(); } else go(-1);
   }));
+  const panel = svg.closest('.src');
+  if ('IntersectionObserver' in window && panel) {
+    new IntersectionObserver(([e]) => {
+      const on = e.intersectionRatio >= 0.3;
+      if (on === onScreen) return;
+      onScreen = on;
+      schedule(idx < 0 ? 600 : BEAT);
+    }, { threshold: [0, 0.3, 0.6] }).observe(panel);
+  } else {
+    onScreen = true;
+  }
+
+  // The loop changes the list and the words every few seconds, so the side column is held at its
+  // tallest and the buttons at their widest, and nothing below or beside them jumps.
+  const side = stepsEl.parentElement;
+  function reserve() {
+    for (const [btn, words] of [[nextBtn, ['Next step', 'Start over']], [playBtn, ['Play', 'Pause']]]) {
+      const keep = btn.textContent;
+      btn.style.minWidth = '';
+      let w = 0;
+      for (const t of words) { btn.textContent = t; w = Math.max(w, btn.getBoundingClientRect().width); }
+      btn.textContent = keep;
+      if (w) btn.style.minWidth = Math.ceil(w) + 'px';
+    }
+    side.style.minHeight = '';
+    const width = side.getBoundingClientRect().width;
+    if (!width) return;
+    const probe = side.cloneNode(true);
+    probe.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = `position:absolute;left:-9999px;top:0;width:${width}px;visibility:hidden`;
+    document.body.appendChild(probe);
+    const list = probe.querySelector('.src-steps'), say = probe.querySelector('.src-explain');
+    let h = 0;
+    for (const k of ORDER) {
+      list.innerHTML = PROGS[k].steps.map((st) => `<li><b>${st.t}</b><span>${st.sig.join(', ')}</span></li>`).join('');
+      for (const t of [IDLE, ...PROGS[k].steps.map((st) => st.say)]) { say.textContent = t; h = Math.max(h, probe.offsetHeight); }
+    }
+    probe.remove();
+    side.style.minHeight = Math.ceil(h) + 'px';
+  }
+  let resizeT = 0;
+  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(reserve, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserve);
+  window.addEventListener('load', reserve);
+
+  pick(ORDER[0]);
+  setLoop(true);
   go(-1);
+  reserve();
 }
 
 /* ---------------------------------------------------------------- */

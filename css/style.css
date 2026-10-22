@@ -388,3 +388,44 @@ html:not(.js) .cue { display: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; }
 }
+
+/* Cursor, a small planet (js/cursor.js). The system draws the gold dot so it never lags; the orbit and
+   its satellite follow a moment behind, and stardust trails off as the mouse moves. Mouse only. */
+html.cur-on, html.cur-on *, html.cur-on dialog::backdrop {
+  cursor: url("../pictures/cursor/dot.png") 10 10, auto !important;
+  cursor: -webkit-image-set(url("../pictures/cursor/dot.png") 1x, url("../pictures/cursor/dot@2x.png") 2x) 10 10, auto !important;
+  cursor: image-set(url("../pictures/cursor/dot.png") 1x, url("../pictures/cursor/dot@2x.png") 2x) 10 10, auto !important;
+}
+.cur { position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 100; pointer-events: none; }
+.cur-pos { position: absolute; left: 0; top: 0; will-change: transform; transition: opacity 0.25s; }
+.cur.away .cur-pos { opacity: 0; }
+.cur-orbit { position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; transition: transform 0.35s cubic-bezier(.2, .8, .2, 1); }
+.cur.hot .cur-orbit { transform: scale(1.45); }
+.cur.down .cur-orbit { transform: scale(0.82); }
+.cur.hot.down .cur-orbit { transform: scale(1.25); }
+.cur-ring { position: absolute; inset: 0; overflow: visible; }
+.cur-ring ellipse { fill: none; stroke: var(--text); stroke-opacity: 0.45; stroke-width: 1; vector-effect: non-scaling-stroke; transition: stroke 0.25s, stroke-opacity 0.25s; }
+.cur.hot .cur-ring ellipse { stroke: var(--gold); stroke-opacity: 0.9; }
+/* a circle squashed and tipped into the same ellipse as the ring; the satellite turns the other way
+   inside it so it stays round */
+.cur-tilt { position: absolute; left: 24px; top: 24px; transform: rotate(-24deg) scaleY(0.3833); }
+.cur-spin { position: absolute; left: 0; top: 0; animation: cur-spin 3.4s linear infinite; }
+.cur-sat { position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; border-radius: 50%; background: var(--text); animation: cur-sat 3.4s linear infinite; transition: background-color 0.25s; }
+.cur.hot .cur-sat { background: var(--gold); }
+@keyframes cur-spin { to { transform: rotate(360deg); } }
+/* brighter on the near side of the orbit, dimmer behind */
+@keyframes cur-sat {
+  0% { transform: translateX(18px) rotate(0deg) scaleY(2.609) rotate(24deg); opacity: 0.7; }
+  25% { transform: translateX(18px) rotate(-90deg) scaleY(2.609) rotate(24deg); opacity: 1; }
+  50% { transform: translateX(18px) rotate(-180deg) scaleY(2.609) rotate(24deg); opacity: 0.7; }
+  75% { transform: translateX(18px) rotate(-270deg) scaleY(2.609) rotate(24deg); opacity: 0.3; }
+  100% { transform: translateX(18px) rotate(-360deg) scaleY(2.609) rotate(24deg); opacity: 0.7; }
+}
+.cur-dust { position: absolute; left: -1px; top: -1px; width: 2px; height: 2px; border-radius: 50%; background: var(--text); opacity: 0; will-change: transform, opacity; }
+.cur-dust.g { background: var(--gold); }
+.cur-ping { position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .cur-spin, .cur-sat { animation: none; }
+  .cur-spin { transform: rotate(90deg); }
+  .cur-sat { transform: translateX(18px) rotate(-90deg) scaleY(2.609) rotate(24deg); }
+}
