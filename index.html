@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fayez Ismail</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fayez Ismail, computer engineering at Queen's University. Robots, satellites and the systems that tell robots where they are.">
+<meta property="og:title" content="Fayez Ismail">
+<meta property="og:description" content="Computer engineering at Queen's University. Robots, satellites and the systems that tell robots where they are.">
+<meta property="og:image" content="pictures/ProfilePic.jpg">
+<meta name="theme-color" content="#06080b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%23f5b83d'/%3E%3Cellipse cx='16' cy='16' rx='15' ry='5' fill='none' stroke='%23ecebe4' stroke-width='2' transform='rotate(-24 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..900&family=Mona+Sans:wdth,wght@75..125,300..800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="overlay" aria-hidden="true">
+  <svg id="leaders" width="100%" height="100%"></svg>
+</div>
+
+<header class="bar" id="bar">
+  <a class="bar-name" href="#top">Fayez Ismail</a>
+  <nav class="bar-nav" id="site-nav" aria-label="Sections">
+    <a href="#sky" data-nav="sky">Satellites</a>
+    <a href="#about" data-nav="about">About</a>
+    <a href="#global" data-nav="global">FIRST Global</a>
+    <a href="#robots" data-nav="robots">Robots</a>
+    <a href="#projects" data-nav="projects">Projects</a>
+    <a href="#work" data-nav="work">Work</a>
+    <a href="#contact" data-nav="contact">Contact</a>
+  </nav>
+  <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+</header>
+
+<p class="clock" id="clock" aria-hidden="true"></p>
+
+<main id="main">
+
+  <!-- 1. The sky: a GPS satellite, the constellations, then Ottawa -->
+  <section class="chapter" id="sky" style="--len:3.3" data-pin aria-label="Satellites">
+    <span id="top"></span>
+    <div class="stage">
+      <div class="panel">
+        <div class="step hero" data-at="0" data-until="0.75">
+          <h1 class="hero-name">Fayez<br>Ismail</h1>
+          <p class="hero-lede">I study computer engineering at Queen's University, in the robotics stream. I build robots, and these days I work on how they know exactly where they are.</p>
+          <p class="hero-now">Robotics and Systems Engineering Intern at Calian in Ottawa.</p>
+          <p class="links">
+            <a href="#contact">Email</a>
+            <a href="https://www.linkedin.com/in/fayez-ismail/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/FayezIsmail27" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </div>
+
+        <div class="step" data-at="0.95" data-until="2.3">
+          <h2>Robots that listen to the sky</h2>
+          <p>Every dot is a navigation satellite. At Calian in Ottawa, I work on robots that use them to know where they are.</p>
+          <p class="meta">Calian, Ottawa. May 2026 to now.</p>
+        </div>
+      </div>
+      <p class="cue" id="cue" aria-hidden="true"><i></i>Scroll to come down to Earth</p>
+    </div>
+  </section>
+
+  <!-- 2. About, with a few things orbiting the Earth -->
+  <section class="chapter" id="about" style="--len:3.4" data-pin aria-labelledby="about-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="2.4">
+          <h2 id="about-h">Hi, I'm Fayez</h2>
+          <p>I'm in my third year of Computer Engineering at Queen's, in the robotics stream. What hooks me is the moment a pile of parts starts acting on its own: a rover finding its way across a room, a processor running its first instruction, a robot that knows exactly where it is.</p>
+          <p>I've been part of FIRST Global every year since 2022, first competing, then volunteering and mentoring.</p>
+          <p>Next I want to go deeper into embedded systems, sensor fusion and positioning. Robotics has already taken me to Geneva, Singapore, Athens, Panama City, Michigan and Ottawa, and that trip comes next.</p>
+        </div>
+      </div>
+      <div class="orbit-cards">
+        <div class="ocard ocard-edu" data-card="edu">
+          <img src="pictures/QueensLogo.png" alt="" width="173" height="192">
+          <p><strong>Queen's University</strong><br>Computer Engineering, robotics stream<br>Class of 2028</p>
+        </div>
+        <div class="ocard ocard-note" data-card="now">
+          <p><strong>Right now</strong><br>Interning at Calian in Ottawa, on robots that know where they are.</p>
+        </div>
+        <figure class="ocard ocard-photo" data-card="night">
+          <img src="pictures/ProfilePic.jpg" alt="Fayez seen from behind on a lit downtown street at night." width="744" height="744" loading="lazy">
+          <figcaption>Out after dark, somewhere downtown.</figcaption>
+        </figure>
+        <div class="ocard ocard-note" data-card="clubs">
+          <p><strong>Around campus</strong><br>Vice President of Academics for the ECE Club, where I also make the event graphics, and an electrical engineer on Queen's Knights Robotics.</p>
+        </div>
+        <figure class="ocard ocard-photo" data-card="athens">
+          <img src="pictures/WalkingInGreece.jpg" alt="Fayez smiling in Athens, wearing a FIRST Global volunteer lanyard, with flags and a crowd behind him." width="434" height="578" loading="lazy">
+          <figcaption>Athens, 2024, volunteering at FIRST Global.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FIRST Global, city to city -->
+  <section class="chapter" id="global" style="--len:3.82" data-pin aria-labelledby="global-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="2.82">
+          <h2 id="global-h">FIRST Global</h2>
+          <p>Every year FIRST Global brings youth robotics teams from more than 190 countries to one city for a week of matches. I competed once, then kept coming back to help.</p>
+          <ol class="stops" id="stops">
+            <li><b>2022</b><span>Geneva</span><em>Competed as my team's programmer</em></li>
+            <li><b>2023</b><span>Singapore</span><em>Flying Squad at the Robot Hospital, fixing robots between matches</em></li>
+            <li><b>2024</b><span>Athens</span><em>Mobile Flying Squad, out on the floor with the teams</em></li>
+            <li><b>2025</b><span>Panama City</span><em>My fourth FIRST Global Challenge</em></li>
+            <li><b>2026</b><span>Michigan</span><em>Competed in the Master Robotics competition</em></li>
+            <li><b>2026</b><span>Ottawa</span><em>Competed at the AEAC student drone competition</em></li>
+          </ol>
+          <p class="meta"><span class="km" id="fgc-km">0</span> km city to city, and I've mentored teams every year since 2022.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The robots, driving around the planet -->
+  <section class="chapter" id="robots" style="--len:2" data-pin aria-labelledby="robots-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="1">
+          <h2 id="robots-h">Back on the ground</h2>
+          <p>Knowing where you are only matters when something has to move. These are the robots I've built or worked on, from a rover with satellite antennas to a plane that tows a banner. Keep scrolling and each one comes up close.</p>
+          <ul class="robot-list">
+            <li><a href="#scout">Scout Mini</a></li>
+            <li><a href="#qkrt">Knights Robotics</a></li>
+            <li><a href="#plane">Banner plane</a></li>
+            <li><a href="#fgc">FIRST Global robot</a></li>
+            <li><a href="#duck">Quackston line follower</a></li>
+            <li><a href="#lunar">Lunar rover</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Showcases -->
+  <section class="chapter show" id="scout" style="--len:3.9" data-pin data-model="scout" aria-labelledby="scout-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">Calian, 2026</p>
+          <h2 id="scout-h">AgileX Scout Mini</h2>
+          <p>A small four wheel drive base with independent suspension, fitted out to know where it is and what's around it. The parts on top are what turn it from a remote control car into a robot that can find its own way.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/scout-2.jpg" aria-label="Open the photo of the real robot">
+              <img src="pictures/scout-1.jpg" alt="The real Scout Mini on an office carpet, with two antennas on its white box and a flag mast." width="619" height="1100" loading="lazy">
+            </button>
+            <figcaption>The real one</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="antennas">
+          <h3>Two GNSS antennas</h3>
+          <p>One at the front and one at the back, on the robot's center line. Comparing the signal at each one tells the robot which way it is facing, even when it's standing still.</p>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="camera">
+          <h3>Depth camera</h3>
+          <p>An Intel RealSense D455, centered under the front antenna, sees in 3D, so the robot knows how far away everything in front of it is.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.9" data-part="inside">
+          <h3>IMU and Raspberry Pi</h3>
+          <p>A BNO085 inertial sensor in the back right corner tracks turns and tilt between satellite fixes. The Raspberry Pi next to it runs ROS 2 and ties every sensor together.</p>
+        </div>
+      </div>
+      <div class="shots" data-n="3" role="group" aria-label="Photos of the real thing">
+        <figure class="shot" data-ar="1" data-pos="50% 64%">
+          <button type="button" class="shot-btn" data-full="pictures/scout-1.jpg" aria-label="Open the photo: From the back">
+            <img src="pictures/scout-1.jpg" alt="The real Scout Mini from behind, with the flag mast on one corner and a GNSS antenna beside it." width="619" height="1100" loading="lazy">
+          </button>
+          <figcaption>From the back</figcaption>
+        </figure>
+        <figure class="shot" data-part="antennas" data-ar="1" data-pos="50% 70%">
+          <button type="button" class="shot-btn" data-full="pictures/scout-2.jpg" aria-label="Open the photo: From the side">
+            <img src="pictures/scout-2.jpg" alt="The Scout Mini from the side, with an antenna at each end of the white box." width="619" height="1100" loading="lazy">
+          </button>
+          <figcaption>From the side</figcaption>
+        </figure>
+        <figure class="shot" data-part="camera" data-ar="1" data-pos="50% 52%">
+          <button type="button" class="shot-btn" data-full="pictures/scout-3.jpg" aria-label="Open the photo: From the front">
+            <img src="pictures/scout-3.jpg" alt="The Scout Mini from the front right, with the depth camera low on the front of the box." width="619" height="1100" loading="lazy">
+          </button>
+          <figcaption>From the front</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter show" id="qkrt" style="--len:4.9" data-pin data-model="qkrt" aria-labelledby="qkrt-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">Queen's Knights Robotics, 2024 to now</p>
+          <h2 id="qkrt-h">A RoboMaster style robot</h2>
+          <p>Our team builds robots for ARCC 2026, a competition where robots fire small projectiles at each other's armor plates while an onboard referee system keeps score. I'm one of the electrical engineers.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/qkrt-cad.jpg" aria-label="Open the CAD render of the team's robot">
+              <img src="pictures/qkrt-cad.jpg" alt="A CAD render of the team's robot, with mecanum wheels, armor plates and a blue gimbal on top." width="860" height="740" loading="lazy">
+            </button>
+            <figcaption>Our Hero robot in CAD</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="wheels">
+          <h3>Mecanum wheels</h3>
+          <p>Rollers set at 45 degrees let the robot slide sideways and spin in place, so it can dodge while the turret keeps aiming.</p>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="armor">
+          <h3>Armor modules</h3>
+          <p>Each plate senses hits and reports them to the referee system, which takes health away. Lose it all and you're out.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.85" data-part="gimbal">
+          <h3>Gimbal and launcher</h3>
+          <p>Two motors aim the launcher: one turns the whole turret through a pair of gears, the other tilts the barrel. Two spinning wheels fire the 42&nbsp;mm balls, and a speed monitor at the muzzle checks every shot stays under the speed limit.</p>
+        </div>
+        <div class="step part" data-at="3.1" data-until="3.6" data-part="power">
+          <h3>Power, which is my part</h3>
+          <p>I design high energy capacitor banks and the protection for our battery management system, and I pick the MOSFETs and IGBTs that can take the motor loads when the robot is pushed hard.</p>
+        </div>
+      </div>
+      <div class="shots" data-n="3" role="group" aria-label="Photos of the real thing">
+        <figure class="shot" data-part="power">
+          <button type="button" class="shot-btn" data-full="pictures/qkrt-power.jpg" aria-label="Open the photo: Power wiring on our robot">
+            <img src="pictures/qkrt-power.jpg" alt="Red power cables running into the referee power module on the robot's carbon fiber plate." width="1100" height="619" loading="lazy">
+          </button>
+          <figcaption>Power wiring on our robot</figcaption>
+        </figure>
+        <figure class="shot" data-part="power" data-ar="1" data-pos="50% 22%">
+          <button type="button" class="shot-btn" data-full="pictures/qkrt-battery.jpg" aria-label="Open the photo: Battery and power module">
+            <img src="pictures/qkrt-battery.jpg" alt="The battery mount and power module on the real robot, next to a suspension spring." width="600" height="800" loading="lazy">
+          </button>
+          <figcaption>Battery and power module</figcaption>
+        </figure>
+        <figure class="shot">
+          <button type="button" class="shot-btn" data-full="pictures/qkrt-cad.jpg" aria-label="Open the photo: Our Hero robot in CAD">
+            <img src="pictures/qkrt-cad.jpg" alt="A CAD render of the team's Hero robot." width="860" height="740" loading="lazy">
+          </button>
+          <figcaption>Our Hero robot in CAD</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter show" id="plane" style="--len:3.9" data-pin data-model="plane" aria-labelledby="plane-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">Queen's Aerospace Design Team, 2025 to 2026</p>
+          <h2 id="plane-h">A banner towing bush plane</h2>
+          <p>The team's plane for AIAA Design Build Fly 2026: three fast laps empty, a charter flight full of passengers, then a banner unrolled in flight and dropped. It's a mid wing design with a 1.5 m span, laid up by hand in carbon fiber.</p>
+          <p>I was on the research team that season, working on a VTOL prototype: propulsion, avionics, and tuning PX4 until it could hover steadily and fly on its own.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/plane-cad.jpg" aria-label="Open the CAD render of the plane">
+              <img src="pictures/plane-cad.jpg" alt="A grey CAD render of the plane seen from above, with two motors on the wing and a conventional tail." width="1155" height="900" loading="lazy">
+            </button>
+            <figcaption>The airframe in CAD</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="motors">
+          <h3>Two motors on the leading edge</h3>
+          <p>Two 580 KV brushless motors swing 11 by 6 propellers, fed by one 6S battery in the belly.</p>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="cabin">
+          <h3>The passengers are rubber ducks</h3>
+          <p>The charter mission is scored on how many passengers and how much cargo you carry. This one seats nine ducks and three pucks.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.9" data-part="banner">
+          <h3>The banner</h3>
+          <p>It rides outside the plane on takeoff. Mid flight it unrolls on lines routed through the tail, and when a pin is pulled it lets go and drops to the ground.</p>
+        </div>
+      </div>
+      <div class="shots" data-n="3" role="group" aria-label="Photos of the real thing">
+        <figure class="shot">
+          <button type="button" class="shot-btn" data-full="pictures/plane-cad.jpg" aria-label="Open the photo: The airframe in CAD">
+            <img src="pictures/plane-cad.jpg" alt="A grey CAD render of the plane seen from above." width="1155" height="900" loading="lazy">
+          </button>
+          <figcaption>The airframe in CAD</figcaption>
+        </figure>
+        <figure class="shot" data-part="cabin">
+          <button type="button" class="shot-btn" data-full="pictures/plane-layout.jpg" aria-label="Open the photo: Ducks, cargo and electronics">
+            <img src="pictures/plane-layout.jpg" alt="A side view drawing of the plane with rows of ducks and the electronics inside." width="1200" height="814" loading="lazy">
+          </button>
+          <figcaption>Ducks, cargo and electronics</figcaption>
+        </figure>
+        <figure class="shot" data-part="banner" data-ar="2.82">
+          <button type="button" class="shot-btn" data-full="pictures/plane-banner.jpg" aria-label="Open the photo: The banner, as designed">
+            <img src="pictures/plane-banner.jpg" alt="A render of the plane towing a banner on two lines from its tail." width="1388" height="492" loading="lazy">
+          </button>
+          <figcaption>The banner, as designed</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter show" id="fgc" style="--len:3.9" data-pin data-model="fgc" aria-labelledby="fgc-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">FIRST Global Challenge</p>
+          <h2 id="fgc-h">A FIRST Global robot</h2>
+          <p>Every team builds from the same kit of REV parts: aluminum extrusion, motors, omni wheels and control hubs. With everyone on the same parts, the difference comes down to design and code. I was my team's programmer in Geneva in 2022, and I've mentored teams every year since.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/fgc-front.jpg" aria-label="Open a render of the robot">
+              <img src="pictures/fgc-front.jpg" alt="A render of the robot from its CAD, with an orange flap intake at the front and a big ball behind it." width="1120" height="1020" loading="lazy">
+            </button>
+            <figcaption>Rendered from the CAD</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="intake">
+          <h3>Intake</h3>
+          <p>A roller of orange flaps spins at the front and pulls the red balls in off the floor.</p>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="hubs">
+          <h3>The hubs</h3>
+          <p>One REV hub on each side wall. Between them they wire up every motor and servo, and the robot's code runs on them.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.9" data-part="arms">
+          <h3>Two arms</h3>
+          <p>They reach back over the big ball, with belts driving small omni wheels at their tips.</p>
+        </div>
+      </div>
+      <div class="shots" data-n="3" role="group" aria-label="Renders of the robot from its CAD">
+        <figure class="shot" data-part="intake" data-ar="1.1">
+          <button type="button" class="shot-btn" data-full="pictures/fgc-front.jpg" aria-label="Open the render: The intake end">
+            <img src="pictures/fgc-front.jpg" alt="A render of the robot from the front, with the orange flap intake over a red ball." width="1120" height="1020" loading="lazy">
+          </button>
+          <figcaption>The intake end, rendered</figcaption>
+        </figure>
+        <figure class="shot" data-part="hubs" data-ar="1.41">
+          <button type="button" class="shot-btn" data-full="pictures/fgc-side.jpg" aria-label="Open the render: Side view">
+            <img src="pictures/fgc-side.jpg" alt="A side view render of the robot, with the hub on its side wall and the big ball behind." width="1200" height="849" loading="lazy">
+          </button>
+          <figcaption>Side view</figcaption>
+        </figure>
+        <figure class="shot" data-part="arms" data-ar="1.22">
+          <button type="button" class="shot-btn" data-full="pictures/fgc-arms.jpg" aria-label="Open the render: The arms over the ball">
+            <img src="pictures/fgc-arms.jpg" alt="A render of the robot from behind, with two arms reaching over a big grey ball." width="1200" height="982" loading="lazy">
+          </button>
+          <figcaption>The arms over the ball</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter show" id="duck" style="--len:4.6" data-pin data-model="duck" aria-labelledby="duck-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">Course project, Queen's</p>
+          <h2 id="duck-h">The Quackston line follower</h2>
+          <p>A small robot that drives itself around the Town of Quackston, a model city with roads, intersections and AprilTag signs. Ours carried a duck and its treasure under a canopy of vines.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/duckbot-front.jpg" aria-label="Open the photo of the real robot">
+              <img src="pictures/duckbot-front.jpg" alt="The real line follower with a vine canopy, a wooden box of gold coins and a rubber duck on top." width="825" height="1100" loading="lazy">
+            </button>
+            <figcaption>The real one</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="gray">
+          <h3>Grayscale sensor</h3>
+          <p>Three sensors under the nose read the line. When the middle one drifts off, the robot steers back.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/grayscale-sensor.jpg" aria-label="Open the photo of the real sensor">
+              <img src="pictures/grayscale-sensor.jpg" alt="The real three channel grayscale sensor on its aluminum bracket, with its cable plugged in." width="900" height="1200" loading="lazy">
+            </button>
+            <figcaption>The real sensor</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="sonar">
+          <h3>Ultrasonic sensor</h3>
+          <p>Pings ahead and waits for the echo, so the robot stops before it runs into anything.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.85" data-part="brain">
+          <h3>Raspberry Pi and Robot HAT</h3>
+          <p>The Pi does the thinking and the HAT drives the motors and servo. The three LEDs on the mini breadboard show what it's doing.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/robot-hat.jpg" aria-label="Open the photo of the real wiring">
+              <img src="pictures/robot-hat.jpg" alt="The real Robot HAT on the Raspberry Pi, with a small speaker and a bundle of colored wires." width="900" height="1200" loading="lazy">
+            </button>
+            <figcaption>The real wiring</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="3.1" data-until="3.6" data-part="duck">
+          <h3>The passenger</h3>
+          <p>Every robot in Quackston has a duck to deliver. Ours rode on its own chest of gold.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/quackston.jpg" aria-label="Open the photo of the Town of Quackston">
+              <img src="pictures/quackston.jpg" alt="The Town of Quackston, a floor mat of roads and intersections with small buildings and rubber ducks." width="1400" height="446" loading="lazy">
+            </button>
+            <figcaption>The Town of Quackston</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="shots" data-n="4" role="group" aria-label="Photos of the real thing">
+        <figure class="shot" data-ar="1" data-pos="50% 46%">
+          <button type="button" class="shot-btn" data-full="pictures/duckbot-front.jpg" aria-label="Open the photo: Our robot">
+            <img src="pictures/duckbot-front.jpg" alt="The real line follower with its vine canopy and treasure chest." width="825" height="1100" loading="lazy">
+          </button>
+          <figcaption>Our robot</figcaption>
+        </figure>
+        <figure class="shot" data-part="gray" data-ar="1" data-pos="50% 30%">
+          <button type="button" class="shot-btn" data-full="pictures/grayscale-sensor.jpg" aria-label="Open the photo: The grayscale sensor">
+            <img src="pictures/grayscale-sensor.jpg" alt="The real three channel grayscale sensor on its bracket." width="900" height="1200" loading="lazy">
+          </button>
+          <figcaption>The grayscale sensor</figcaption>
+        </figure>
+        <figure class="shot" data-part="brain" data-ar="1" data-pos="50% 55%">
+          <button type="button" class="shot-btn" data-full="pictures/robot-hat.jpg" aria-label="Open the photo: The wiring">
+            <img src="pictures/robot-hat.jpg" alt="The Robot HAT on the Raspberry Pi with its bundle of wires." width="900" height="1200" loading="lazy">
+          </button>
+          <figcaption>The wiring</figcaption>
+        </figure>
+        <figure class="shot" data-part="duck" data-ar="3.14">
+          <button type="button" class="shot-btn" data-full="pictures/quackston.jpg" aria-label="Open the photo: The Town of Quackston">
+            <img src="pictures/quackston.jpg" alt="The Town of Quackston, a floor mat of roads and intersections." width="1400" height="446" loading="lazy">
+          </button>
+          <figcaption>The Town of Quackston</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter show" id="lunar" style="--len:3.9" data-pin data-model="lunar" aria-labelledby="lunar-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.6">
+          <p class="kicker">Canadian Space Agency project, 2024</p>
+          <h2 id="lunar-h">Lunar rover</h2>
+          <p>A small rover designed to cross the lunar surface, built over twelve weeks. I led the project and worked on the electrical integration, the SOLIDWORKS models and the traction.</p>
+          <figure class="real">
+            <button type="button" class="real-btn" data-full="pictures/LunarRover.jpg" aria-label="Open the photo of the real rover">
+              <img src="pictures/LunarRover.jpg" alt="The real rover, white and 3D printed, with two ultrasonic sensor eyes and red wheel hubs." width="624" height="281" loading="lazy">
+            </button>
+            <figcaption>The real one</figcaption>
+          </figure>
+        </div>
+        <div class="step part" data-at="0.85" data-until="1.35" data-part="eyes">
+          <h3>Ultrasonic eyes</h3>
+          <p>Two transducers on the nose, one to ping and one to listen, so it can see rocks before it hits them.</p>
+        </div>
+        <div class="step part" data-at="1.6" data-until="2.1" data-part="wheels">
+          <h3>Paddle treads</h3>
+          <p>Loose regolith swallows smooth tires. The paddles dig in and push off the ground instead.</p>
+        </div>
+        <div class="step part" data-at="2.35" data-until="2.9" data-part="lid">
+          <h3>Printed shell</h3>
+          <p>The whole body is 3D printed, with a lid that comes off so the electronics stay easy to reach.</p>
+        </div>
+      </div>
+      <div class="shots" data-n="1" role="group" aria-label="Photos of the real thing">
+        <figure class="shot" data-ar="2.22">
+          <button type="button" class="shot-btn" data-full="pictures/LunarRover.jpg" aria-label="Open the photo: The finished rover">
+            <img src="pictures/LunarRover.jpg" alt="The finished rover, white and 3D printed, with red wheel hubs." width="624" height="281" loading="lazy">
+          </button>
+          <figcaption>The finished rover</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Projects -->
+  <section class="flow" id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+      <h2 class="flow-title" id="projects-h">Projects</h2>
+
+      <article class="proj proj-src" id="src">
+        <div class="proj-head">
+          <p class="kicker">ELEC 374, Queen's, with two classmates</p>
+          <h3>Mini SRC processor</h3>
+          <p>Three of us built a 32 bit processor in Verilog, tested every instruction in simulation, then ran it on a DE0 CV FPGA board. My part was the ALU: a carry lookahead adder for add and subtract, plus the logic, shift, rotate and negate operations. I also built the load and store paths and the CON FF, the small circuit that decides whether a branch is taken.</p>
+          <p>In our final version instructions come from their own memory, so a fetch takes one clock instead of three. On the board it reads the switches, writes to the seven segment displays and handles interrupts from a button.</p>
+          <p class="links"><a href="https://github.com/FayezIsmail27/CPUProject" target="_blank" rel="noopener">See the Verilog on GitHub</a></p>
+        </div>
+        <div class="src">
+          <div class="src-controls">
+            <div class="seg" role="group" aria-label="Instruction">
+              <button type="button" class="btn" data-prog="ld" aria-pressed="false">ld R1, 0x55(R2)</button>
+              <button type="button" class="btn" data-prog="add" aria-pressed="true">add R3, R4, R5</button>
+              <button type="button" class="btn" data-prog="br" aria-pressed="false">brzr R2, 3</button>
+            </div>
+            <div class="src-step-btns">
+              <button type="button" class="btn" id="src-back">Back</button>
+              <button type="button" class="btn btn-main" id="src-next">Next step</button>
+              <button type="button" class="btn" id="src-play" aria-pressed="false">Play</button>
+            </div>
+          </div>
+          <div class="src-body">
+            <div class="src-scroll"><svg id="src-svg" viewBox="0 0 640 420" role="img" aria-label="The Mini SRC datapath: registers, ALU, branch logic and two memories around one shared bus"></svg></div>
+            <div class="src-side">
+              <ol class="src-steps" id="src-steps"></ol>
+              <p class="src-explain" id="src-explain" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj proj-ace" id="ace">
+        <div class="ace-view" id="ace-view" aria-hidden="true">
+          <img class="ace-fallback" src="pictures/ACE.jpg" alt="" width="553" height="397" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <p class="kicker">Team lead, Sep to Dec 2024</p>
+          <h3>Automated Cultivation Environment</h3>
+          <p>Ashwagandha is a medicinal plant with real cultural and health value, and it's fussy about how it grows. Our planter holds the conditions it likes with sensors and automatic climate control. Spools on the threaded rod at the front pull the plastic cover shut over the soil, or let it gather at the back when the plants want sun, and a web interface lets you watch it all and adjust it.</p>
+          <p class="hint">Scroll and the cover opens.</p>
+          <p class="tools">Built with C++, JavaScript, Arduino and KiCad.</p>
+          <figure class="real real-wide">
+            <img src="pictures/ACE.jpg" alt="The real planter, shown open with seedlings in the soil and closed under its plastic cover." width="553" height="397" loading="lazy">
+            <figcaption>The real one, open and closed</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="proj proj-disp" id="dispenser">
+        <figure class="loupe-box" data-loupe>
+          <img src="pictures/Dispenser.png" alt="SOLIDWORKS drawing of the dispenser assembly, with its container, funnel, gears, turntable and mast called out." width="775" height="596" loading="lazy">
+        </figure>
+        <div class="proj-body">
+          <p class="kicker">Team lead, Sep to Dec 2023</p>
+          <h3>Fluid and Powder Dispenser</h3>
+          <p>A machine that measures out precise amounts of fluid and powder. I led the team and worked on the 3D models, the Arduino code and the wiring.</p>
+          <p class="tools">Built with C++, Arduino and SOLIDWORKS. <span class="hint">Hover the drawing to look closer.</span></p>
+          <p class="links"><a href="https://github.com/FayezIsmail27/Automated-Fluid-Powder-Dispenser-" target="_blank" rel="noopener">See the Arduino code on GitHub</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 7. Skills, as a map of where each one was used -->
+  <section class="flow" id="skills" aria-labelledby="skills-h">
+    <div class="wrap">
+      <h2 class="flow-title" id="skills-h">What I work with</h2>
+      <p class="flow-lede">Pick a skill to see where I used it, or pick a place to see what it took.</p>
+      <div class="graph" id="graph">
+        <svg class="graph-lines" id="graph-lines" aria-hidden="true"></svg>
+        <div class="graph-col graph-skills" id="graph-skills"></div>
+        <div class="graph-col graph-places" id="graph-places"></div>
+      </div>
+      <p class="graph-note" id="graph-note" aria-live="polite">Pick a skill or a place.</p>
+    </div>
+  </section>
+
+  <!-- 8. Work, drawn to scale -->
+  <section class="flow" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <h2 class="flow-title" id="work-h">Work</h2>
+      <p class="flow-lede">Everything I've been part of since 2020, drawn to scale. Pick a row for the details.</p>
+      <div class="tl" id="tl"></div>
+      <h3 class="vol-title">Volunteering, 2019 to 2023</h3>
+      <ul class="vol">
+        <li><span class="logo"><img src="pictures/USAIDLOGO.png" alt="" width="225" height="225" loading="lazy"></span><p><strong>Organizer and Representative</strong><br>USAID, human rights</p></li>
+        <li><span class="logo logo-word" aria-hidden="true">IFRC</span><p><strong>Organization Team</strong><br>International Federation of Red Cross and Red Crescent Societies, health</p></li>
+        <li><span class="logo"><img src="pictures/trustprogram.jpg" alt="" width="188" height="188" loading="lazy"></span><p><strong>Teacher</strong><br>Trust Program, working with children</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. Contact, with the Earth back where it started -->
+  <section class="chapter contact" id="contact" style="--len:1.25" data-pin aria-labelledby="contact-h">
+    <div class="stage">
+      <div class="panel">
+        <div class="step" data-at="0" data-until="0.25">
+          <h2 id="contact-h">Say hello</h2>
+          <p>Email is the quickest way to reach me.</p>
+          <div class="email-row">
+            <a class="email" id="email" href="mailto:fayezismail2025@gmail.com">fayezismail2025@gmail.com</a>
+            <button type="button" class="btn" id="copy-email">Copy</button>
+            <span class="copy-done" id="copy-done" aria-live="polite"></span>
+          </div>
+          <p class="links">
+            <a href="https://www.linkedin.com/in/fayez-ismail/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/FayezIsmail27" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.instagram.com/fayezi23/" target="_blank" rel="noopener">Instagram</a>
+          </p>
+          <p class="foot">Fayez Ismail, 2026. Earth imagery from NASA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog class="viewer" id="viewer">
+  <form method="dialog"><button class="btn viewer-close" type="submit">Close</button></form>
+  <img id="viewer-img" alt="">
+</dialog>
+</body>
+</html>
